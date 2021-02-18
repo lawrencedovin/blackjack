@@ -22,7 +22,7 @@ import random
 
 ##################### Hints #####################
 cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
-choice = input("Do you want to play a game of Blackjack? Type 'y' or 'n': ").lower()
+play_game_choice = input("Do you want to play a game of Blackjack? Type 'y' or 'n': ").lower()
 player_hand = random.sample(cards,2)
 player_score = sum(player_hand)
 dealers_hand = random.sample(cards,2)
@@ -36,7 +36,21 @@ def print_cards(player_hand, player_score, dealers_hand):
     print(f"Your cards: {player_hand}, current score: {player_score}")
     print(f"Dealer's first card: {dealers_hand[0]}")
 
-# def check_win
+def check_win(player_hand, player_score, dealers_hand, dealers_score):
+    if dealers_score < 17:
+        dealers_hand.append(random.choice(cards))
+        dealers_score = sum(dealers_hand)
+    print(f"Your final hand: {player_hand}, final score: {player_score}")
+    print(f"Dealer's final hand: {dealers_hand}, final score: {dealers_score}")
+    if dealers_score and player_score <= 21:
+        if dealers_score == player_score:
+            print("Tie!")
+        else:
+            print("Dealer won!") if dealers_score > player_score else print("Player won!")
+    elif dealers_score > 21:
+        print("Dealer has went over 21, Player won!")
+    else:
+        print("Player has went over 21, Dealer won!")
 
 def draw_card(choice, player_hand, player_score, dealers_hand, dealers_score):
     if choice == "y":
@@ -46,16 +60,14 @@ def draw_card(choice, player_hand, player_score, dealers_hand, dealers_score):
             dealers_hand.append(random.choice(cards))
             dealers_score = sum(dealers_hand)
         print_cards(player_hand, player_score, dealers_hand)
-        print(f"Your final hand: {player_hand}, final score: {player_score}")
-        print(f"Dealer's final hand: {dealers_hand}, final score: {dealers_score}")
+        check_win(player_hand, player_score, dealers_hand, dealers_score)
     else:
-        print("hello")
+        check_win(player_hand, player_score, dealers_hand, dealers_score)
 
-if choice == "y":
+if play_game_choice == "y":
     clear()
     print(logo)
     print_cards(player_hand, player_score, dealers_hand)
-
     draw_card_choice = input("Type 'y' to get another card, type 'n' to pass: ")
     draw_card(draw_card_choice, player_hand, player_score, dealers_hand, dealers_score)
 else:
