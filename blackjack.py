@@ -1,6 +1,6 @@
 from art import logo
 import os
-from random import sample
+import random
 ############### Blackjack Project #####################
 
 #Difficulty Normal 😎: Use all Hints below to complete the project.
@@ -23,19 +23,31 @@ from random import sample
 ##################### Hints #####################
 cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
 choice = input("Do you want to play a game of Blackjack? Type 'y' or 'n': ").lower()
-your_hand = sample(cards,2)
-your_score = sum(your_hand)
-dealers_hand = sample(cards,2)
+player_hand = random.sample(cards,2)
+player_score = sum(player_hand)
+dealers_hand = random.sample(cards,2)
 dealers_score = sum(dealers_hand)
 
 def clear():
     os.system("cls")
     os.system("clear")
 
+def print_cards(player_hand, player_score, dealers_hand):
+    print(f"Your cards: {player_hand}, current score: {player_score}")
+    print(f"Dealer's first card: {dealers_hand[0]}")
+
+
 if choice == "y":
     clear()
     print(logo)
-    print(f"Your cards: {your_hand}, current score: {your_score}")
-    print(f"Dealer's first card: {dealers_hand[0]}")
+    print_cards(player_hand, player_score, dealers_hand)
+
+    draw_card = input("Type 'y' to get another card, type 'n' to pass: ")
+    if draw_card == "y":
+        player_hand.append(random.choice(cards))
+        player_score = sum(player_hand)
+        print_cards(player_hand, player_score, dealers_hand)
+    else:
+        print("hello")
 else:
     exit()
