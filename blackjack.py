@@ -36,18 +36,27 @@ def print_cards(player_hand, player_score, dealers_hand):
     print(f"Your cards: {player_hand}, current score: {player_score}")
     print(f"Dealer's first card: {dealers_hand[0]}")
 
+# def check_win
+
+def draw_card(choice, player_hand, player_score, dealers_hand, dealers_score):
+    if choice == "y":
+        player_hand.append(random.choice(cards))
+        player_score = sum(player_hand)
+        if dealers_score < 17:
+            dealers_hand.append(random.choice(cards))
+            dealers_score = sum(dealers_hand)
+        print_cards(player_hand, player_score, dealers_hand)
+        print(f"Your final hand: {player_hand}, final score: {player_score}")
+        print(f"Dealer's final hand: {dealers_hand}, final score: {dealers_score}")
+    else:
+        print("hello")
 
 if choice == "y":
     clear()
     print(logo)
     print_cards(player_hand, player_score, dealers_hand)
 
-    draw_card = input("Type 'y' to get another card, type 'n' to pass: ")
-    if draw_card == "y":
-        player_hand.append(random.choice(cards))
-        player_score = sum(player_hand)
-        print_cards(player_hand, player_score, dealers_hand)
-    else:
-        print("hello")
+    draw_card_choice = input("Type 'y' to get another card, type 'n' to pass: ")
+    draw_card(draw_card_choice, player_hand, player_score, dealers_hand, dealers_score)
 else:
     exit()
