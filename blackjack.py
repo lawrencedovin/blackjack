@@ -22,13 +22,13 @@ import random
 ## The computer is the dealer.
 
 ##################### Hints #####################
-play_game_choice = input("Do you want to play a game of Blackjack? Type 'y' or 'n': ").lower()
-player_hand = random.sample(cards,2)
-player_score = sum(player_hand)
-dealers_hand = random.sample(cards,2)
-dealers_score = sum(dealers_hand)
+def blackjack():
+    play_game_choice = input("Do you want to play a game of Blackjack? Type 'y' or 'n': ").lower()
+    player_hand = random.sample(cards,2)
+    player_score = sum(player_hand)
+    dealers_hand = random.sample(cards,2)
+    dealers_score = sum(dealers_hand)
 
-def blackjack(player_hand, player_score, dealers_hand, dealers_score):
     if play_game_choice == "y":
         clear()
         print(logo)
@@ -36,11 +36,9 @@ def blackjack(player_hand, player_score, dealers_hand, dealers_score):
         draw_card_choice = input("Type 'y' to get another card, type 'n' to pass: ")
         draw_card(draw_card_choice, player_hand, player_score, dealers_hand, dealers_score)
         continue_choice = input("Play again? Type 'y' or 'n': ").lower()
-        if continue_choice == "y":
-            blackjack(player_hand, player_score, dealers_hand, dealers_score)
-        else:
-            exit()
+        blackjack() if continue_choice == "y" else exit()
     else:
         exit()
 
-blackjack(player_hand, player_score, dealers_hand, dealers_score)
+# Truthy or Falsy instead
+blackjack()
